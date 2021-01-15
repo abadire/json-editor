@@ -5,6 +5,7 @@
     cols="30"
     rows="10"
     placeholder="Enter a JSON string..."
+    [(ngModel)]="str"
   ></textarea>
-  <a routerLink="/table" [state]="{data: 'a'}" class="btn btn-primary">Edit</a>
+  <a routerLink="/table" [state]="{str: str}" class="btn btn-primary">Edit</a>
 </div>
