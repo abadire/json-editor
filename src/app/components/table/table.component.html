@@ -1,14 +1,19 @@
-<table class="table">
+<table class="table container">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col" *ngFor="let col of columns">{{col}}</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let entry of entries; let i = index">
       <th scope="row">{{ i + 1 }}</th>
       <td *ngFor="let col of columns">{{ entry[col] }}</td>
+      <td>
+        <button class="btn btn-primary btn--left">Edit</button>
+        <button class="btn btn-danger" (click)="deleteEntry(i)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
