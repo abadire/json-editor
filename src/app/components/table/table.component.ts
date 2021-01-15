@@ -7,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableComponent implements OnInit {
 
+  columns: string[];
+  entries: object[];
+  e: any;
+
   constructor() { }
 
   ngOnInit(): void {
-    console.log(history.state);
+    console.log(history.state.str);
+    this.entries = JSON.parse(history.state.str);
+    this.columns = Object.keys(this.entries[0]);
   }
-
 }
