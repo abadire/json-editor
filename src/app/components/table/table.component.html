@@ -1,4 +1,4 @@
-<table class="table container">
+<table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -11,7 +11,7 @@
       <th scope="row">{{ i + 1 }}</th>
       <td *ngFor="let col of columns">{{ entry[col] }}</td>
       <td>
-        <button class="btn btn-primary btn--left">Edit</button>
+        <a [routerLink]="'edit/' + i" class="btn btn-primary btn--left">Edit</a>
         <button class="btn btn-danger" (click)="deleteEntry(i)">Delete</button>
       </td>
     </tr>

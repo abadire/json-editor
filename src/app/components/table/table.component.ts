@@ -9,7 +9,6 @@ export class TableComponent implements OnInit {
 
   columns: string[] = [];
   entries: object[] = [];
-  e: any;
 
   constructor() { }
 
@@ -26,5 +25,6 @@ export class TableComponent implements OnInit {
 
   deleteEntry(idx) {
     this.entries.splice(idx, 1);
+    localStorage.setItem('jsonStr', JSON.stringify(this.entries));
   }
 }
