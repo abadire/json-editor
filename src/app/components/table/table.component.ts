@@ -29,6 +29,6 @@ export class TableComponent implements OnInit {
   }
 
   get jsonStr() {
-    return {str: 5};
+    return {str: JSON.stringify(this.entries)};
   }
 }
