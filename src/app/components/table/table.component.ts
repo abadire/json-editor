@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-table',
@@ -9,6 +10,9 @@ export class TableComponent implements OnInit {
 
   columns: string[] = [];
   entries: object[] = [];
+
+  up = faArrowUp;
+  down = faArrowDown;
 
   constructor() { }
 
@@ -30,5 +34,19 @@ export class TableComponent implements OnInit {
 
   get jsonStr() {
     return {str: JSON.stringify(this.entries)};
+  }
+
+  moveDown(idx) {
+    if (idx < this.entries.length - 1) {
+      [this.entries[idx], this.entries[idx + 1]] = [this.entries[idx + 1], this.entries[idx]];
+      localStorage.setItem('jsonStr', JSON.stringify(this.entries));
+    }
+  }
+
+  moveUp(idx) {
+    if (idx > 0) {
+      [this.entries[idx], this.entries[idx - 1]] = [this.entries[idx - 1], this.entries[idx]];
+      localStorage.setItem('jsonStr', JSON.stringify(this.entries));
+    }
   }
 }

@@ -11,6 +11,8 @@
       <th scope="row">{{ i + 1 }}</th>
       <td *ngFor="let col of columns">{{ entry[col] }}</td>
       <td>
+        <fa-icon [icon]="up" class="btn--left arrow" (click)="moveUp(i)"></fa-icon>
+        <fa-icon [icon]="down" class="btn--left arrow" (click)="moveDown(i)"></fa-icon>
         <a [routerLink]="'edit/' + i" class="btn btn-primary btn--left">Edit</a>
         <button class="btn btn-danger" (click)="deleteEntry(i)">Delete</button>
       </td>
