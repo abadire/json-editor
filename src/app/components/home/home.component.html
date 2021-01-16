@@ -5,9 +5,12 @@
   rows="10"
   placeholder="Enter a JSON string..."
   [(ngModel)]="str"
-  #myname
+  #textarea
 ></textarea>
 <div class="button-group">
   <a routerLink="/table" [state]="{str: str}" class="btn btn-primary">Edit</a>
   <button class="btn btn-primary" (click)="downloadCsv('json.csv', str)">Download CSV</button>
+  <button class="btn btn-primary" (click)="downloadJson('json.JSON', str)">Download JSON</button>
+  <input type="file" accept="application/JSON" #upload style="display:none;" (input)="readFile()">
+  <button class="btn btn-primary" (click)="uploadFile()">Upload JSON</button>
 </div>

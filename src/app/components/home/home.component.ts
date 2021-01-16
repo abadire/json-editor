@@ -6,11 +6,18 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('myname') input; 
+  @ViewChild('textarea') input;
+  @ViewChild('upload') fileInput;
 
-  str:string = '[{"name":"Name 1","year":"2010"},{"name":"Name 2","year":"1997"},{"name":"Name 3","year":"2004"}]';
+  str:string = '';
 
   constructor() { }
+
+  selectTextarea() {
+    setTimeout(() => {
+      this.input.nativeElement.select();
+    });
+  }
 
   ngOnInit(): void {
     localStorage.clear();
@@ -18,7 +25,7 @@ export class HomeComponent implements OnInit {
       this.str = history.state.str;
     }
     setTimeout(() => {
-      this.input.nativeElement.select();
+      this.selectTextarea();
     });
   }
 
@@ -46,4 +53,22 @@ export class HomeComponent implements OnInit {
 
     this.download(filename, 'data:text/csv;charset=utf-8,' + encodeURI(contents));
   };
+
+  downloadJson(filename, json) {
+    this.download(filename, 'data:text/json;charset=utf-8,' + encodeURI(json));
+  }
+
+  uploadFile() {
+    this.fileInput.nativeElement.click();
+    
+  }
+  
+  readFile() {
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+      this.str = String(event.target.result);
+      this.selectTextarea();
+    });
+    reader.readAsText(this.fileInput.nativeElement.files[0]);
+  }
 }
