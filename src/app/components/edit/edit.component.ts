@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -12,7 +12,7 @@ export class EditComponent implements OnInit {
   columns: string[] = [];
   entries: object = {};
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -23,8 +23,9 @@ export class EditComponent implements OnInit {
     this.columns = Object.keys(this.entries[0]);
   }
 
-  routeToTable() {
-    const str = JSON.stringify(this.entries);
-    this.router.navigate(['/table'], {state: {str}});
+  get jsonStr() {
+    return {
+      str: JSON.stringify(this.entries)
+    };
   }
 }

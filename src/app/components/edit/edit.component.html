@@ -13,6 +13,6 @@
   </div>
   <div class="button-group">
     <a routerLink="/table" class="btn btn-danger">Cancel</a>
-    <a class="btn btn-success" (click)="routeToTable()">Save</a>
+    <a routerLink="/table" [state]="jsonStr" class="btn btn-success">Save</a>
   </div>
 </form>
