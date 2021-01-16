@@ -8,7 +8,8 @@ import { TableComponent } from './components/table/table.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'table/edit/:row',
@@ -25,7 +26,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(
+    routes,
+    { onSameUrlNavigation: 'reload' }
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

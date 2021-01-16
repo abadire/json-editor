@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,22 +12,27 @@ export class HomeComponent implements OnInit {
 
   str:string = '';
 
-  constructor() { }
-
   selectTextarea() {
     setTimeout(() => {
       this.input.nativeElement.select();
     });
   }
 
+  constructor(private router: Router) {
+    router.events.subscribe(e => {
+      if (e instanceof NavigationEnd) {
+        this.str = history.state.str;
+        this.selectTextarea();
+      }
+    });
+  }
+
+
   ngOnInit(): void {
     localStorage.clear();
     if (history.state.str) {
       this.str = history.state.str;
     }
-    setTimeout(() => {
-      this.selectTextarea();
-    });
   }
 
   download(filename, text) {
