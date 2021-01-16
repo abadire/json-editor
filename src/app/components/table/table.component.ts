@@ -27,4 +27,8 @@ export class TableComponent implements OnInit {
     this.entries.splice(idx, 1);
     localStorage.setItem('jsonStr', JSON.stringify(this.entries));
   }
+
+  get jsonStr() {
+    return {str: 5};
+  }
 }
