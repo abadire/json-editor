@@ -7,4 +7,7 @@
   [(ngModel)]="str"
   #myname
 ></textarea>
-<a routerLink="/table" [state]="{str: str}" class="btn btn-primary">Edit</a>
+<div class="button-group">
+  <a routerLink="/table" [state]="{str: str}" class="btn btn-primary">Edit</a>
+  <button class="btn btn-primary" (click)="downloadCsv('json.csv', str)">Download CSV</button>
+</div>

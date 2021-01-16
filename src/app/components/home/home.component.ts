@@ -17,9 +17,33 @@ export class HomeComponent implements OnInit {
     if (history.state.str) {
       this.str = history.state.str;
     }
+    setTimeout(() => {
+      this.input.nativeElement.select();
+    });
   }
+
+  download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', text);
+    element.setAttribute('download', filename);
   
-  ngAfterViewChecked() {
-    this.input.nativeElement.select();
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
   }
+
+  downloadCsv(filename ,json) {
+    const obj = JSON.parse(json);
+    const columns = Object.keys(obj[0]);
+
+    let contents = columns.join(',') + '\r\n';;
+    contents += obj.map(entry => {
+      return Object.values(entry).join(',');
+    }).join('\r\n');
+
+    this.download(filename, 'data:text/csv;charset=utf-8,' + encodeURI(contents));
+  };
 }
