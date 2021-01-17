@@ -12,7 +12,12 @@ function download(filename: string, text: string) {
 }
 
 export function downloadCsv(filename: string, json: string) {
-  const obj = JSON.parse(json);
+  let obj: object[];
+  try {
+    obj = JSON.parse(json);
+  } catch {
+    return;
+  }
   const columns = Object.keys(obj[0]);
 
   let contents = `${columns.join(',')}\r\n`;
@@ -22,5 +27,10 @@ export function downloadCsv(filename: string, json: string) {
 }
 
 export function downloadJson(filename: string, json: string) {
+  try {
+    JSON.parse(json);
+  } catch {
+    return;
+  }
   download(filename, `data:text/json;charset=utf-8,${encodeURI(json)}`);
 }
