@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -14,6 +15,8 @@ export class TableComponent implements OnInit {
   up = faArrowUp;
 
   down = faArrowDown;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     if (history.state.str) {
@@ -47,5 +50,13 @@ export class TableComponent implements OnInit {
       [this.entries[idx], this.entries[idx - 1]] = [this.entries[idx - 1], this.entries[idx]];
       localStorage.setItem('jsonStr', JSON.stringify(this.entries));
     }
+  }
+
+  addEntry() {
+    const obj = { ...this.entries[0] };
+    Object.keys(obj).forEach((key) => { obj[key] = ''; });
+    this.entries.push(obj);
+    localStorage.setItem('jsonStr', JSON.stringify(this.entries));
+    this.router.navigate([`table/edit/${this.entries.length - 1}`]);
   }
 }

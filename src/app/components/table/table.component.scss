@@ -2,11 +2,11 @@
   margin-right: 10px;
 }
 
-.btn--to-json {
-  margin-left: 50%;
-  transform: translateX(-50%);
-}
-
 .arrow {
   cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-evenly;
 }

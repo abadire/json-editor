@@ -19,4 +19,7 @@
     </tr>
   </tbody>
 </table>
-<a routerLink="" [state]="jsonStr" class="btn btn-success btn--to-json">Convert to JSON</a>
+<div class="button-group">
+  <a class="btn btn-success" (click)="addEntry()">Add entry</a>
+  <a routerLink="" [state]="jsonStr" class="btn btn-success">Convert to JSON</a>
+</div>
