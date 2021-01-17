@@ -4,17 +4,16 @@ import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-
   columns: string[] = [];
+
   entries: object[] = [];
 
   up = faArrowUp;
-  down = faArrowDown;
 
-  constructor() { }
+  down = faArrowDown;
 
   ngOnInit(): void {
     if (history.state.str) {
@@ -33,7 +32,7 @@ export class TableComponent implements OnInit {
   }
 
   get jsonStr() {
-    return {str: JSON.stringify(this.entries)};
+    return { str: JSON.stringify(this.entries) };
   }
 
   moveDown(idx) {

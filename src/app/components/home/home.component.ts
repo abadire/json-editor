@@ -1,16 +1,23 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
+import { downloadCsv, downloadJson } from '../../../shared/download.utils';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   @ViewChild('textarea') input;
+
   @ViewChild('upload') fileInput;
 
-  str:string = '';
+  str = '';
+
+  downloadCsv: (filename: string, text: string) => void = downloadCsv;
+
+  downloadJson: (filename: string, text: string) => void = downloadJson;
 
   selectTextarea() {
     setTimeout(() => {
@@ -19,14 +26,13 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(private router: Router) {
-    router.events.subscribe(e => {
+    router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         this.str = history.state.str;
         this.selectTextarea();
       }
     });
   }
-
 
   ngOnInit(): void {
     localStorage.clear();
@@ -35,40 +41,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', text);
-    element.setAttribute('download', filename);
-  
-    element.style.display = 'none';
-    document.body.appendChild(element);
-  
-    element.click();
-  
-    document.body.removeChild(element);
-  }
-
-  downloadCsv(filename ,json) {
-    const obj = JSON.parse(json);
-    const columns = Object.keys(obj[0]);
-
-    let contents = columns.join(',') + '\r\n';;
-    contents += obj.map(entry => {
-      return Object.values(entry).join(',');
-    }).join('\r\n');
-
-    this.download(filename, 'data:text/csv;charset=utf-8,' + encodeURI(contents));
-  };
-
-  downloadJson(filename, json) {
-    this.download(filename, 'data:text/json;charset=utf-8,' + encodeURI(json));
-  }
-
   uploadFile() {
     this.fileInput.nativeElement.click();
-    
   }
-  
+
   readFile() {
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {

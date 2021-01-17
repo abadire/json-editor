@@ -18,15 +18,15 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     HomeComponent,
     TableComponent,
     EditComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

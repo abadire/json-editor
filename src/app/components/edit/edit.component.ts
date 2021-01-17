@@ -4,18 +4,19 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  styleUrls: ['./edit.component.scss'],
 })
 export class EditComponent implements OnInit {
+  row = 0;
 
-  row: number = 0;
   columns: string[] = [];
+
   entries: object = {};
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.row = +params.get('row');
     });
 
@@ -25,7 +26,7 @@ export class EditComponent implements OnInit {
 
   get jsonStr() {
     return {
-      str: JSON.stringify(this.entries)
+      str: JSON.stringify(this.entries),
     };
   }
 }

@@ -9,27 +9,27 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    runGuardsAndResolvers: 'always'
+    runGuardsAndResolvers: 'always',
   },
   {
     path: 'table/edit/:row',
-    component: EditComponent
+    component: EditComponent,
   },
   {
     path: 'table',
-    component: TableComponent
+    component: TableComponent,
   },
   {
     path: '**',
-    component: NotFoundComponent
-  }
+    component: NotFoundComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(
     routes,
-    { onSameUrlNavigation: 'reload' }
+    { onSameUrlNavigation: 'reload' },
   )],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
